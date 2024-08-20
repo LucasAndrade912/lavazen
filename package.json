@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "prettier:write": "prettier --config .prettierrc --write .",
-    "prettier:check": "prettier --config .prettierrc --check ."
+    "prettier:check": "prettier --config .prettierrc --check .",
+    "server": "json-server db.json"
   },
   "private": true,
   "dependencies": {

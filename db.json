@@ -1,0 +1,37 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Lucas",
+      "phone": "00911223344"
+    },
+    {
+      "id": "1",
+      "name": "Lucas",
+      "phone": "00955667788"
+    }
+  ],
+  "washings": [
+    {
+      "id": "1",
+      "name": "Lavagem Simples",
+      "price": "19.99"
+    },
+    {
+      "id": "2",
+      "name": "Lavagem Completa",
+      "price": "49.99"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "client": "1",
+      "washing": "1",
+      "date": "17/10/2024",
+      "carModel": "Gol quadrado",
+      "paymentMethod": "pix",
+      "observations": "Ter cuidado com a pintura, ela é nova"
+    }
+  ]
+}
