@@ -3,15 +3,15 @@ import { Washing } from './washing';
 
 export class WashingReservation {
   constructor(
-    private _client: Client,
-    private _washing: Washing,
-    private _date: Date,
     private _carModel: string,
-    private _paymentMethod: 'pix' | 'credit card' | 'cash',
-    private _observations: string
+    private _paymentMethod: string,
+    private _observations: string,
+    private _date: Date | null = null,
+    private _client: Client | null = null,
+    private _washing: Washing | null = null,
   ) {}
 
-  public get client(): Client {
+  public get client(): Client | null {
     return this._client;
   }
 
@@ -19,7 +19,7 @@ export class WashingReservation {
     this._client = value;
   }
 
-  public get washing(): Washing {
+  public get washing(): Washing | null {
     return this._washing;
   }
 
@@ -27,7 +27,7 @@ export class WashingReservation {
     this._washing = value;
   }
 
-  public get date(): Date {
+  public get date(): Date | null {
     return this._date;
   }
 
@@ -43,11 +43,11 @@ export class WashingReservation {
     this._carModel = value;
   }
 
-  public get paymentMethod(): 'pix' | 'credit card' | 'cash' {
+  public get paymentMethod(): string {
     return this._paymentMethod;
   }
 
-  public set paymentMethod(value: 'pix' | 'credit card' | 'cash') {
+  public set paymentMethod(value: string) {
     this._paymentMethod = value;
   }
 

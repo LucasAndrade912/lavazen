@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
+import { WashingReservation } from '../../shared/models/washing-reservation';
+import { ReservationService } from '../../shared/services/reservation.service';
+
 @Component({
   selector: 'app-reservation-form',
   templateUrl: './reservation-form.component.html',
@@ -8,6 +11,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   providers: [provideNativeDateAdapter()]
 })
 export class ReservationFormComponent {
+  constructor(private reservationService: ReservationService) {}
+
   paymentMethodOptions = [
     { viewValue: 'PIX', value: 'pix' },
     { viewValue: 'Cartão de crédito', value: 'credit_card' },
@@ -22,13 +27,10 @@ export class ReservationFormComponent {
   observations: string = '';
 
   onCreate() {
-    console.log({
-      name: this.name,
-      carModel: this.carModel,
-      phone: this.phone,
-      date: this.date?.toLocaleDateString(),
-      paymentMethod: this.paymentMethod,
-      observations: this.observations
+    const reservation = new WashingReservation(this.carModel, this.paymentMethod, this.observations, this.date);
+
+    this.reservationService.createReservation(reservation).subscribe({
+      next: console.log
     })
   }
 }

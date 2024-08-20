@@ -23,7 +23,7 @@
       "price": "49.99"
     }
   ],
-  "bookings": [
+  "reservations": [
     {
       "id": "1",
       "client": "1",
@@ -32,6 +32,15 @@
       "carModel": "Gol quadrado",
       "paymentMethod": "pix",
       "observations": "Ter cuidado com a pintura, ela é nova"
+    },
+    {
+      "id": "2",
+      "client": "1",
+      "washing": "1",
+      "date": "2024-08-21T03:00:00.000Z",
+      "carModel": "HB20",
+      "paymentMethod": "credit_card",
+      "observations": "adadsa"
     }
   ]
 }
