@@ -6,11 +6,13 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { MaterialModule } from '../material/material.module';
 
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
+import { TypeOfWashingComponent } from './type-of-washing/type-of-washing.component';
 
 
 @NgModule({
   declarations: [
-    ReservationFormComponent
+    ReservationFormComponent,
+    TypeOfWashingComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { ReservationFormComponent } from './reservation-form/reservation-form.co
     MaterialModule,
   ],
   exports: [
-    ReservationFormComponent
+    ReservationFormComponent,
+    TypeOfWashingComponent
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())]
 })

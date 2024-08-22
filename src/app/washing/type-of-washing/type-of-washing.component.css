@@ -1,0 +1,76 @@
+/* Reset de margens e paddings */
+.type-of-washing {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.type-of-washing .title {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.cards-of-washing {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Define duas colunas de largura igual */
+    gap: 16px; /* Espaço entre os cards */
+}
+
+/* Esconde os inputs de rádio */
+.card-radio {
+    display: none;
+}
+
+/* Estilo básico dos cards */
+.card {
+    border: 2px solid #00897B;
+    border-radius: 12px;
+    padding: 18px 16px;
+    outline: none;
+    background-color: #fff; /* Cor de fundo padrão */
+    color: #000; /* Cor do texto padrão */
+    transition: all .3s;
+    cursor: pointer;
+}
+
+/* Estilo para o card que está inicialmente ativo */
+.card-initial-active {
+    background-color: #00897B; 
+    color: white;
+}
+
+/* Muda a cor do fundo e do texto quando o card associado ao input de rádio está selecionado */
+.card-radio:checked + .card {
+    background-color: #00897B; /* Cor de fundo ao selecionar */
+    color: white; /* Cor do texto ao selecionar */
+}
+
+.card-radio:checked + .card p {
+    color: white; /* Cor específica para os parágrafos dentro do card selecionado */
+}
+
+/* Estilo para o header dos cards */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header p {
+    font-size: 24px;
+}
+
+/* Estilo para a descrição dos cards */
+.card-description {
+    display: flex;
+}
+
+.card-description .text {
+    display: flex;
+    padding-right: 28px;    
+}
+
+.card-description .text p {
+    font-size: 16px;
+    margin: 0;
+    padding-left: 6px;
+}
