@@ -7,13 +7,13 @@
         </li>
 
         <li>
-            <a href="#">
+            <a [routerLink]="['']">
                 Home
             </a>
         </li>
 
         <li>
-            <a href="#">
+            <a [routerLink]="['reservations']">
                 Agendamentos
             </a>
         </li>
@@ -23,3 +23,5 @@
         <img src="/avatar-angular.png" alt="Foto de perfil">
     </div>
 </header>
+
+<router-outlet></router-outlet>

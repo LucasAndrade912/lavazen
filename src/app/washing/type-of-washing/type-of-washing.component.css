@@ -12,7 +12,6 @@
 
 .cards-of-washing {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Define duas colunas de largura igual */
     gap: 16px; /* Espaço entre os cards */
 }
 
