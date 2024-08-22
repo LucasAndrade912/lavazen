@@ -3,15 +3,18 @@
     border: 0;
     padding: 0;
     margin: 0;
+    width: 760px;
 }
 
 .type-of-washing .title {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 500;
+    margin-bottom: 32px;
 }
 
 .cards-of-washing {
     display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Define duas colunas de largura igual */
     gap: 16px; /* Espaço entre os cards */
 }
 
