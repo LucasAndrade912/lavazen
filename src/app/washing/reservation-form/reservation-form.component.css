@@ -1,0 +1,22 @@
+section h2 {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+section form {
+    display: flex;
+    flex-direction: column;
+    width: 560px;
+    padding: 20px;
+    background-color: #EEE;
+    border-radius: 12px;
+}
+
+section form .row {
+    display: flex;
+    gap: 32px;
+}
+
+section form mat-form-field {
+    width: 100%;
+}
