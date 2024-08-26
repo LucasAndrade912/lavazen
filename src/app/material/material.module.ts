@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     MatDatepickerModule,
     MatCardModule,
+    MatTableModule,
   ],
   exports: [
     MatIconModule,
@@ -29,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     MatDatepickerModule,
     MatCardModule,
+    MatTableModule,
   ],
 })
 export class MaterialModule {}

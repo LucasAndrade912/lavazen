@@ -22,4 +22,10 @@ export class ReservationService {
       observations: reservation.observations,
     });
   }
+
+  listReservations(): Observable<WashingReservation[]> {
+    return this.http.get<WashingReservation[]>(
+      `${this.endpoint}?_embed=washing&_embed=user`
+    );
+  }
 }
