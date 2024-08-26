@@ -6,9 +6,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class SweertalertService {
-  constructor() {}
-
-  sucesso(title: string, message: string) {
+  sucess(title: string, message: string) {
     Swal.fire({
       title: title,
       text: message,

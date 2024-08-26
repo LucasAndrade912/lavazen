@@ -5,24 +5,21 @@ import { Observable } from 'rxjs';
 import { WashingReservation } from '../models/washing-reservation';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReservationService {
-  private baseUrl: string = 'http://localhost:3000';
+  private endpoint = 'http://localhost:3000/reservations';
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   createReservation(reservation: WashingReservation): Observable<WashingReservation> {
-    return this.http.post<WashingReservation>(`${this.baseUrl}/reservations`, {
-      id: "2",
-      client: "1",
-      washing: "1",
+    return this.http.post<WashingReservation>(this.endpoint, {
+      userId: '1',
+      washingId: '1',
       date: reservation.date,
       carModel: reservation.carModel,
       paymentMethod: reservation.paymentMethod,
-      observations: reservation.observations
+      observations: reservation.observations,
     });
   }
 }

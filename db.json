@@ -15,19 +15,21 @@
     {
       "id": "1",
       "name": "Lavagem Simples",
-      "price": "19.99"
+      "price": "19.99",
+      "duration": 20
     },
     {
       "id": "2",
       "name": "Lavagem Completa",
-      "price": "49.99"
+      "price": "49.99",
+      "duration": 20
     }
   ],
   "reservations": [
     {
       "id": "1",
-      "client": "1",
-      "washing": "1",
+      "userId": "1",
+      "washingId": "1",
       "date": "17/10/2024",
       "carModel": "Gol quadrado",
       "paymentMethod": "pix",
@@ -35,12 +37,21 @@
     },
     {
       "id": "2",
-      "client": "1",
-      "washing": "1",
+      "userId": "1",
+      "washingId": "1",
       "date": "2024-08-21T03:00:00.000Z",
       "carModel": "HB20",
       "paymentMethod": "credit_card",
       "observations": "adadsa"
+    },
+    {
+      "id": "0584",
+      "userId": "1",
+      "washingId": "1",
+      "date": "2024-08-29T03:00:00.000Z",
+      "carModel": "HB20",
+      "paymentMethod": "credit_card",
+      "observations": ""
     }
   ]
 }

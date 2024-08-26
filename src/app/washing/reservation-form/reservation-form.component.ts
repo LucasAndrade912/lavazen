@@ -3,34 +3,55 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { WashingReservation } from '../../shared/models/washing-reservation';
 import { ReservationService } from '../../shared/services/reservation.service';
+import { SweertalertService } from '../../shared/services/sweertalert.service';
 
 @Component({
   selector: 'app-reservation-form',
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.css',
-  providers: [provideNativeDateAdapter()]
+  providers: [provideNativeDateAdapter()],
 })
 export class ReservationFormComponent {
-  constructor(private reservationService: ReservationService) {}
+  constructor(
+    private reservationService: ReservationService,
+    private sweetAlertService: SweertalertService
+  ) {}
 
   paymentMethodOptions = [
     { viewValue: 'PIX', value: 'pix' },
     { viewValue: 'Cartão de crédito', value: 'credit_card' },
-    { viewValue: 'Dinheirp', value: 'cash' }
+    { viewValue: 'Dinheiro', value: 'cash' },
   ];
 
-  name: string = 'Lucas';
-  carModel: string = 'HB20';
-  phone: string = '83 900000000';
-  date: Date| null = null;
-  paymentMethod: string = '';
-  observations: string = '';
+  name = '';
+  carModel = '';
+  phone = '';
+  date: Date | null = null;
+  paymentMethod = '';
+  observations = '';
 
   onCreate() {
-    const reservation = new WashingReservation(this.carModel, this.paymentMethod, this.observations, this.date);
+    const reservation = new WashingReservation(
+      this.carModel,
+      this.paymentMethod,
+      this.observations,
+      this.date
+    );
 
     this.reservationService.createReservation(reservation).subscribe({
-      next: console.log
-    })
+      next: () => {
+        this.sweetAlertService.sucess(
+          'Cadastro realizado!',
+          'Reserva de lavagem cadastrada com sucesso.'
+        );
+
+        this.name = '';
+        this.carModel = '';
+        this.phone = '';
+        this.date = null;
+        this.paymentMethod = '';
+        this.observations = '';
+      },
+    });
   }
 }

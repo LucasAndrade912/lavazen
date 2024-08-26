@@ -1,49 +1,55 @@
 <section id="reservation-form">
-    <h2>
-        Dados para agendamento
-    </h2>
+  <h2>Dados para agendamento</h2>
 
-    <form (submit)="onCreate()">
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Nome:</mat-label>
-                <input matInput placeholder="Ex: Fulano de tal" [(ngModel)]="name" name="name">
-            </mat-form-field>
-    
-            <mat-form-field appearance="outline">
-                <mat-label>Modelo do carro:</mat-label>
-                <input matInput placeholder="Ex: HB20, Corsa" [(ngModel)]="carModel" name="carModel">
-            </mat-form-field>
-        </div>
+  <form (submit)="onCreate()">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome:</mat-label>
+        <input matInput placeholder="Ex: Fulano de tal" [(ngModel)]="name" name="name" />
+      </mat-form-field>
 
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Telefone:</mat-label>
-                <input matInput placeholder="(DDD) 00000-0000" [(ngModel)]="phone" name="phone">
-            </mat-form-field>
-    
-            <mat-form-field appearance="outline">
-                <mat-label>Data  da lavagem</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="date" name="date">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Modelo do carro:</mat-label>
+        <input
+          matInput
+          placeholder="Ex: HB20, Corsa"
+          [(ngModel)]="carModel"
+          name="carModel" />
+      </mat-form-field>
+    </div>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Método de pagamento</mat-label>
-            <mat-select [(ngModel)]="paymentMethod" name="paymentMethod">
-              @for (method of paymentMethodOptions; track method) {
-                <mat-option [value]="method.value">{{method.viewValue}}</mat-option>
-              }
-            </mat-select>
-        </mat-form-field>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Telefone:</mat-label>
+        <input matInput placeholder="(DDD) 00000-0000" [(ngModel)]="phone" name="phone" />
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Observações</mat-label>
-            <textarea matInput placeholder="Observações para lavagem..." [(ngModel)]="observations" name="observations"></textarea>
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Data da lavagem</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date" name="date" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-        <button mat-flat-button>Confirmar Reserva</button>
-    </form>
+    <mat-form-field appearance="outline">
+      <mat-label>Método de pagamento</mat-label>
+      <mat-select [(ngModel)]="paymentMethod" name="paymentMethod">
+        @for (method of paymentMethodOptions; track method) {
+          <mat-option [value]="method.value">{{ method.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Observações</mat-label>
+      <textarea
+        matInput
+        placeholder="Observações para lavagem..."
+        [(ngModel)]="observations"
+        name="observations"></textarea>
+    </mat-form-field>
+
+    <button mat-flat-button>Confirmar Reserva</button>
+  </form>
 </section>
