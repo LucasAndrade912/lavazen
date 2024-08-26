@@ -1,27 +1,21 @@
 <header>
-    <ul>
-        <li>
-            <h1>
-                LavaZen
-            </h1>
-        </li>
+  <ul>
+    <li>
+      <a [routerLink]="['']">
+        <h1>LavaZen</h1>
+      </a>
+    </li>
 
-        <li>
-            <a [routerLink]="['']">
-                Home
-            </a>
-        </li>
+    <li>
+      <a [routerLink]="['reservations']">Agendamentos</a>
+    </li>
+  </ul>
 
-        <li>
-            <a [routerLink]="['reservations']">
-                Agendamentos
-            </a>
-        </li>
-    </ul>
-
-    <div id="avatar">
-        <img src="/avatar-angular.png" alt="Foto de perfil">
-    </div>
+  <div id="avatar">
+    <img src="/avatar-angular.png" alt="Foto de perfil" />
+  </div>
 </header>
 
-<router-outlet></router-outlet>
+<main>
+  <router-outlet />
+</main>

@@ -1,9 +1,4 @@
-.washing {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.washing > .type-of-washing {
-    padding-right: 120px;
+div {
+  display: flex;
+  justify-content: space-between;
 }
