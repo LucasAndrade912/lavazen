@@ -1,36 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
-import { WashingReservation } from '../../shared/models/washing-reservation';
-import { ReservationService } from '../../shared/services/reservation.service';
+import { FormData } from './form-data';
 
 @Component({
   selector: 'app-reservation-form',
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.css',
-  providers: [provideNativeDateAdapter()]
+  providers: [provideNativeDateAdapter()],
 })
 export class ReservationFormComponent {
-  constructor(private reservationService: ReservationService) {}
+  formData: FormData = {
+    name: '',
+    carModel: '',
+    phone: '',
+    date: null,
+    paymentMethod: '',
+    observations: '',
+  };
 
   paymentMethodOptions = [
     { viewValue: 'PIX', value: 'pix' },
     { viewValue: 'Cartão de crédito', value: 'credit_card' },
-    { viewValue: 'Dinheirp', value: 'cash' }
+    { viewValue: 'Dinheiro', value: 'cash' },
   ];
 
-  name: string = 'Lucas';
-  carModel: string = 'HB20';
-  phone: string = '83 900000000';
-  date: Date| null = null;
-  paymentMethod: string = '';
-  observations: string = '';
+  @Output() createNewReservationEvent = new EventEmitter<FormData>();
 
-  onCreate() {
-    const reservation = new WashingReservation(this.carModel, this.paymentMethod, this.observations, this.date);
-
-    this.reservationService.createReservation(reservation).subscribe({
-      next: console.log
-    })
+  createNewReservation() {
+    this.createNewReservationEvent.emit(this.formData);
+    this.formData = {
+      name: '',
+      carModel: '',
+      phone: '',
+      date: null,
+      paymentMethod: '',
+      observations: '',
+    };
   }
 }

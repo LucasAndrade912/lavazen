@@ -1,24 +1,18 @@
-section h2 {
-    font-size: 32px;
-    font-weight: 500;
-    margin-bottom: 32px;
-}
-
 section form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 560px;
-    padding: 20px;
-    background-color: #EEE;
-    border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 560px;
+  padding: 20px;
+  background-color: #eee;
+  border-radius: 12px;
 }
 
 section form .row {
-    display: flex;
-    gap: 32px;
+  display: flex;
+  gap: 32px;
 }
 
 section form mat-form-field {
-    width: 100%;
+  width: 100%;
 }

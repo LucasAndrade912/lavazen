@@ -1,4 +1,6 @@
-<div class="washing">
-    <app-type-of-washing class="type-of-washing"></app-type-of-washing>
-    <app-reservation-form></app-reservation-form>
+<div>
+  <app-type-of-washing [(washingId)]="washingId" />
+
+  <app-reservation-form
+    (createNewReservationEvent)="handleCreateNewReservation($event)" />
 </div>

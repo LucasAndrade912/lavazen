@@ -1,78 +1,78 @@
-/* Reset de margens e paddings */
-.type-of-washing {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    width: 760px;
-}
-
-.type-of-washing .title {
-    font-size: 32px;
-    font-weight: 500;
-    margin-bottom: 32px;
-}
-
 .cards-of-washing {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Define duas colunas de largura igual */
-    gap: 16px; /* Espaço entre os cards */
+  width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espaço entre os cards */
 }
 
 /* Esconde os inputs de rádio */
 .card-radio {
-    display: none;
+  display: none;
 }
 
 /* Estilo básico dos cards */
 .card {
-    border: 2px solid #00897B;
-    border-radius: 12px;
-    padding: 18px 16px;
-    outline: none;
-    background-color: #fff; /* Cor de fundo padrão */
-    color: #000; /* Cor do texto padrão */
-    transition: all .3s;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 96px;
+  border: 2px solid #00897b;
+  border-radius: 12px;
+  padding: 18px 16px;
+  outline: none;
+  background-color: #fff; /* Cor de fundo padrão */
+  color: #000; /* Cor do texto padrão */
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 /* Estilo para o card que está inicialmente ativo */
 .card-initial-active {
-    background-color: #00897B; 
-    color: white;
+  background-color: #00897b;
+  color: white;
 }
 
 /* Muda a cor do fundo e do texto quando o card associado ao input de rádio está selecionado */
 .card-radio:checked + .card {
-    background-color: #00897B; /* Cor de fundo ao selecionar */
-    color: white; /* Cor do texto ao selecionar */
+  background-color: #00897b; /* Cor de fundo ao selecionar */
+  color: white; /* Cor do texto ao selecionar */
 }
 
 .card-radio:checked + .card p {
-    color: white; /* Cor específica para os parágrafos dentro do card selecionado */
+  color: white; /* Cor específica para os parágrafos dentro do card selecionado */
+  font-weight: 500;
 }
 
 /* Estilo para o header dos cards */
 .card-header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-header p {
-    font-size: 24px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 /* Estilo para a descrição dos cards */
 .card-description {
-    display: flex;
+  display: flex;
+  gap: 28px;
 }
 
 .card-description .text {
-    display: flex;
-    padding-right: 28px;    
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 4px;
 }
 
 .card-description .text p {
-    font-size: 16px;
-    margin: 0;
-    padding-left: 6px;
+  margin: 0;
+}
+
+.card-description .text mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
 }

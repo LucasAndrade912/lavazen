@@ -15,32 +15,25 @@
     {
       "id": "1",
       "name": "Lavagem Simples",
-      "price": "19.99"
+      "price": "19.99",
+      "duration": 20
     },
     {
       "id": "2",
       "name": "Lavagem Completa",
-      "price": "49.99"
+      "price": "49.99",
+      "duration": 20
     }
   ],
   "reservations": [
     {
-      "id": "1",
-      "client": "1",
-      "washing": "1",
-      "date": "17/10/2024",
-      "carModel": "Gol quadrado",
-      "paymentMethod": "pix",
-      "observations": "Ter cuidado com a pintura, ela é nova"
-    },
-    {
-      "id": "2",
-      "client": "1",
-      "washing": "1",
-      "date": "2024-08-21T03:00:00.000Z",
+      "id": "1484",
+      "userId": "1",
+      "washingId": "2",
+      "date": "30/08/2024",
       "carModel": "HB20",
-      "paymentMethod": "credit_card",
-      "observations": "adadsa"
+      "paymentMethod": "cash",
+      "observations": "Cuidado com a pintura, ela é nova."
     }
   ]
 }
