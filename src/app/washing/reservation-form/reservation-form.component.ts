@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
-import { WashingReservation } from '../../shared/models/washing-reservation';
-import { ReservationService } from '../../shared/services/reservation.service';
-import { SweertalertService } from '../../shared/services/sweertalert.service';
+import { FormData } from './form-data';
 
 @Component({
   selector: 'app-reservation-form',
@@ -12,10 +10,14 @@ import { SweertalertService } from '../../shared/services/sweertalert.service';
   providers: [provideNativeDateAdapter()],
 })
 export class ReservationFormComponent {
-  constructor(
-    private reservationService: ReservationService,
-    private sweetAlertService: SweertalertService
-  ) {}
+  formData: FormData = {
+    name: '',
+    carModel: '',
+    phone: '',
+    date: null,
+    paymentMethod: '',
+    observations: '',
+  };
 
   paymentMethodOptions = [
     { viewValue: 'PIX', value: 'pix' },
@@ -23,35 +25,17 @@ export class ReservationFormComponent {
     { viewValue: 'Dinheiro', value: 'cash' },
   ];
 
-  name = '';
-  carModel = '';
-  phone = '';
-  date: Date | null = null;
-  paymentMethod = '';
-  observations = '';
+  @Output() createNewReservationEvent = new EventEmitter<FormData>();
 
-  onCreate() {
-    const reservation = new WashingReservation(
-      this.carModel,
-      this.paymentMethod,
-      this.observations,
-      this.date
-    );
-
-    this.reservationService.createReservation(reservation).subscribe({
-      next: () => {
-        this.sweetAlertService.sucess(
-          'Cadastro realizado!',
-          'Reserva de lavagem cadastrada com sucesso.'
-        );
-
-        this.name = '';
-        this.carModel = '';
-        this.phone = '';
-        this.date = null;
-        this.paymentMethod = '';
-        this.observations = '';
-      },
-    });
+  createNewReservation() {
+    this.createNewReservationEvent.emit(this.formData);
+    this.formData = {
+      name: '',
+      carModel: '',
+      phone: '',
+      date: null,
+      paymentMethod: '',
+      observations: '',
+    };
   }
 }

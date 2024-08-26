@@ -1,33 +1,30 @@
-import { Client } from './client';
-import { Washing } from './washing';
-
-export class WashingReservation {
+export class Reservation {
   constructor(
+    private _userId: string,
+    private _washingId: string,
     private _carModel: string,
     private _paymentMethod: string,
     private _observations: string,
-    private _date: Date | null = null,
-    private _client: Client | null = null,
-    private _washing: Washing | null = null,
+    private _date: Date = new Date()
   ) {}
 
-  public get client(): Client | null {
-    return this._client;
+  public get userId(): string {
+    return this._userId;
   }
 
-  public set client(value: Client) {
-    this._client = value;
+  public set userId(value: string) {
+    this._userId = value;
   }
 
-  public get washing(): Washing | null {
-    return this._washing;
+  public get washingId(): string {
+    return this._washingId;
   }
 
-  public set washing(value: Washing) {
-    this._washing = value;
+  public set washingId(value: string) {
+    this._washingId = value;
   }
 
-  public get date(): Date | null {
+  public get date(): Date {
     return this._date;
   }
 

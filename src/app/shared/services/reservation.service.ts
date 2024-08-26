@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { WashingReservation } from '../models/washing-reservation';
+import { Reservation } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -12,20 +12,18 @@ export class ReservationService {
 
   constructor(private http: HttpClient) {}
 
-  createReservation(reservation: WashingReservation): Observable<WashingReservation> {
-    return this.http.post<WashingReservation>(this.endpoint, {
+  createReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<Reservation>(this.endpoint, {
       userId: '1',
-      washingId: '1',
-      date: reservation.date,
+      washingId: reservation.washingId,
+      date: reservation.date.toLocaleDateString(),
       carModel: reservation.carModel,
       paymentMethod: reservation.paymentMethod,
       observations: reservation.observations,
     });
   }
 
-  listReservations(): Observable<WashingReservation[]> {
-    return this.http.get<WashingReservation[]>(
-      `${this.endpoint}?_embed=washing&_embed=user`
-    );
+  listReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.endpoint}?_embed=washing&_embed=user`);
   }
 }

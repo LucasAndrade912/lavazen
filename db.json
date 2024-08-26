@@ -27,31 +27,13 @@
   ],
   "reservations": [
     {
-      "id": "1",
+      "id": "1484",
       "userId": "1",
-      "washingId": "1",
-      "date": "17/10/2024",
-      "carModel": "Gol quadrado",
-      "paymentMethod": "pix",
-      "observations": "Ter cuidado com a pintura, ela é nova"
-    },
-    {
-      "id": "2",
-      "userId": "1",
-      "washingId": "1",
-      "date": "2024-08-21T03:00:00.000Z",
+      "washingId": "2",
+      "date": "30/08/2024",
       "carModel": "HB20",
-      "paymentMethod": "credit_card",
-      "observations": "adadsa"
-    },
-    {
-      "id": "0584",
-      "userId": "1",
-      "washingId": "1",
-      "date": "2024-08-29T03:00:00.000Z",
-      "carModel": "HB20",
-      "paymentMethod": "credit_card",
-      "observations": ""
+      "paymentMethod": "cash",
+      "observations": "Cuidado com a pintura, ela é nova."
     }
   ]
 }

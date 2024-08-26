@@ -1,11 +1,15 @@
 <section id="reservation-form">
   <h2>Dados para agendamento</h2>
 
-  <form (submit)="onCreate()">
+  <form (submit)="createNewReservation()">
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Nome:</mat-label>
-        <input matInput placeholder="Ex: Fulano de tal" [(ngModel)]="name" name="name" />
+        <input
+          matInput
+          placeholder="Ex: Fulano de tal"
+          [(ngModel)]="formData.name"
+          name="name" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -13,7 +17,7 @@
         <input
           matInput
           placeholder="Ex: HB20, Corsa"
-          [(ngModel)]="carModel"
+          [(ngModel)]="formData.carModel"
           name="carModel" />
       </mat-form-field>
     </div>
@@ -21,12 +25,20 @@
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Telefone:</mat-label>
-        <input matInput placeholder="(DDD) 00000-0000" [(ngModel)]="phone" name="phone" />
+        <input
+          matInput
+          placeholder="(DDD) 00000-0000"
+          [(ngModel)]="formData.phone"
+          name="phone" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Data da lavagem</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="date" name="date" />
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="formData.date"
+          name="date" />
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -34,7 +46,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Método de pagamento</mat-label>
-      <mat-select [(ngModel)]="paymentMethod" name="paymentMethod">
+      <mat-select [(ngModel)]="formData.paymentMethod" name="paymentMethod">
         @for (method of paymentMethodOptions; track method) {
           <mat-option [value]="method.value">{{ method.viewValue }}</mat-option>
         }
@@ -46,7 +58,7 @@
       <textarea
         matInput
         placeholder="Observações para lavagem..."
-        [(ngModel)]="observations"
+        [(ngModel)]="formData.observations"
         name="observations"></textarea>
     </mat-form-field>
 
