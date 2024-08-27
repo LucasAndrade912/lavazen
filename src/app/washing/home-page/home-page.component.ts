@@ -19,6 +19,21 @@ export class HomePageComponent {
   washingId = '';
 
   handleCreateNewReservation(data: FormData) {
+    if (
+      !this.washingId
+      || !data.carModel
+      || !data.date 
+      || !data.paymentMethod 
+      || !data.name
+      || !data.phone
+    ) {
+      this.sweetAlertService.error(
+        'Preencha todos os campos',
+        'Preencha todos os campos para seguir com o cadastro.'
+      )
+      return;
+    }
+
     const reservation = new Reservation(
       '1',
       this.washingId,

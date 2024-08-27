@@ -7,6 +7,7 @@
         <mat-label>Nome:</mat-label>
         <input
           matInput
+          required
           placeholder="Ex: Fulano de tal"
           [(ngModel)]="formData.name"
           name="name" />
@@ -16,6 +17,7 @@
         <mat-label>Modelo do carro:</mat-label>
         <input
           matInput
+          required
           placeholder="Ex: HB20, Corsa"
           [(ngModel)]="formData.carModel"
           name="carModel" />
@@ -27,6 +29,7 @@
         <mat-label>Telefone:</mat-label>
         <input
           matInput
+          required
           placeholder="(DDD) 00000-0000"
           [(ngModel)]="formData.phone"
           name="phone" />
@@ -36,6 +39,9 @@
         <mat-label>Data da lavagem</mat-label>
         <input
           matInput
+          required
+          [min]="minDate"
+          [max]="maxDate"
           [matDatepicker]="picker"
           [(ngModel)]="formData.date"
           name="date" />
@@ -46,7 +52,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Método de pagamento</mat-label>
-      <mat-select [(ngModel)]="formData.paymentMethod" name="paymentMethod">
+      <mat-select [(ngModel)]="formData.paymentMethod" name="paymentMethod" required>
         @for (method of paymentMethodOptions; track method) {
           <mat-option [value]="method.value">{{ method.viewValue }}</mat-option>
         }

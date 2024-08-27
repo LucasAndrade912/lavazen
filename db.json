@@ -34,6 +34,15 @@
       "carModel": "HB20",
       "paymentMethod": "cash",
       "observations": "Cuidado com a pintura, ela é nova."
+    },
+    {
+      "id": "0860",
+      "userId": "1",
+      "washingId": "2",
+      "date": "29/08/2024",
+      "carModel": "HB20",
+      "paymentMethod": "cash",
+      "observations": ""
     }
   ]
 }
