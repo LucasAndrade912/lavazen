@@ -1,0 +1,14 @@
+<div class="container">
+  <section id="type-of-washing">
+    <h2>Escolha o tipo de Lavagem</h2>
+
+    <div class="cards">
+      @for (card of washingTypesCards; track card.id) {
+        <app-washing-type-card [props]="card" [(washingId)]="washingId" />
+      }
+    </div>
+  </section>
+
+  <app-reservation-form
+    (createNewReservationEvent)="handleCreateNewReservation($event)" />
+</div>

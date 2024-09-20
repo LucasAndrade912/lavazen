@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ReservationService } from '../../shared/services/reservation.service';
-import { SweertalertService } from '../../shared/services/sweertalert.service';
-import { Reservation } from '../../shared/models/reservation';
-import { FormData } from '../reservation-form/form-data';
+import { Reservation } from '../../../shared/models/reservation';
+import { ReservationService } from '../../../shared/services/reservation.service';
+import { SweertalertService } from '../../../shared/services/sweertalert.service';
+import { FormData } from '../../components/reservation-form/form-data';
+
+interface WashingCard {
+  id: string;
+  value: string;
+  title: string;
+  price: number;
+  duration: number;
+}
 
 @Component({
   selector: 'app-home-page',
@@ -18,19 +26,36 @@ export class HomePageComponent {
 
   washingId = '';
 
+  washingTypesCards: WashingCard[] = [
+    {
+      id: 'card1',
+      value: '1',
+      title: 'Lavagem simples',
+      price: 20,
+      duration: 20,
+    },
+    {
+      id: 'card2',
+      value: '2',
+      title: 'Lavagem completa',
+      price: 50,
+      duration: 45,
+    },
+  ];
+
   handleCreateNewReservation(data: FormData) {
     if (
-      !this.washingId
-      || !data.carModel
-      || !data.date 
-      || !data.paymentMethod 
-      || !data.name
-      || !data.phone
+      !this.washingId ||
+      !data.carModel ||
+      !data.date ||
+      !data.paymentMethod ||
+      !data.name ||
+      !data.phone
     ) {
       this.sweetAlertService.error(
         'Preencha todos os campos',
         'Preencha todos os campos para seguir com o cadastro.'
-      )
+      );
       return;
     }
 

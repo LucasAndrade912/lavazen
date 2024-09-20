@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ReservationService } from '../../shared/services/reservation.service';
-import { Reservation } from '../../shared/models/reservation';
+import { Reservation } from '../../../shared/models/reservation';
+import { ReservationService } from '../../../shared/services/reservation.service';
 
 @Component({
   selector: 'app-reservations-page',

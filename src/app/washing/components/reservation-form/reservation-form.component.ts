@@ -21,7 +21,9 @@ export class ReservationFormComponent {
 
   private readonly _currentDate = new Date();
   readonly minDate = new Date(this._currentDate);
-  readonly maxDate = new Date(this._currentDate.setMonth(this._currentDate.getMonth() + 1));
+  readonly maxDate = new Date(
+    this._currentDate.setMonth(this._currentDate.getMonth() + 1)
+  );
 
   paymentMethodOptions = [
     { viewValue: 'PIX', value: 'pix' },

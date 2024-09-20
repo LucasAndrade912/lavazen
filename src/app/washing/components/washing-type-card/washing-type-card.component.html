@@ -1,0 +1,27 @@
+<input
+  type="radio"
+  name="card"
+  class="card-radio"
+  [id]="props.id"
+  [value]="props.value"
+  [(ngModel)]="washingId"
+  (ngModelChange)="onWashingIdChange()" />
+
+<label [for]="props.id" class="card">
+  <div class="card-header">
+    <p>{{ props.title }}</p>
+    <mat-icon>info</mat-icon>
+  </div>
+
+  <div class="card-description">
+    <div class="text">
+      <mat-icon>attach_money</mat-icon>
+      <p>{{ props.price | currency: 'BRL' }}</p>
+    </div>
+
+    <div class="text">
+      <mat-icon>timer</mat-icon>
+      <p>{{ props.duration }} min</p>
+    </div>
+  </div>
+</label>
