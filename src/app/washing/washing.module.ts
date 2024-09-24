@@ -17,7 +17,7 @@ import { ReservationsPageComponent } from './pages/reservations-page/reservation
     WashingTypeCardComponent,
   ],
   imports: [CommonModule, FormsModule, MaterialModule],
-  exports: [ReservationFormComponent],
+  exports: [HomePageComponent, ReservationFormComponent],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class WashingModule {}

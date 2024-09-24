@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AuthModule } from './auth/auth.module';
+import { LayoutsModule } from './shared/layouts/layouts.module';
 import { WashingModule } from './washing/washing.module';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, WashingModule, RouterModule],
+  imports: [BrowserModule, AppRoutingModule, LayoutsModule, WashingModule, AuthModule],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,21 @@
+<div>
+  <h1>LavaZen</h1>
+
+  <form class="container" [formGroup]="loginForm" (submit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nome:</mat-label>
+      <input type="text" formControlName="name" matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Senha:</mat-label>
+      <input type="password" formControlName="password" matInput />
+    </mat-form-field>
+
+    <button type="submit" mat-flat-button>Sign In</button>
+
+    <span class="small"
+      >Não possui cadastro? <a routerLink="/signup">Cadastra-se agora!</a></span
+    >
+  </form>
+</div>
