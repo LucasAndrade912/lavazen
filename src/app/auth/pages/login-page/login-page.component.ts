@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { AuthService } from '../../../shared/services/auth.service';
+import { SweertalertService } from '../../../shared/services/sweertalert.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,23 +12,47 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPageComponent {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private sweetAlertService: SweertalertService
+  ) {
     this.loginForm = this.formBuilder.group({
-      name: ['', Validators.required, Validators.minLength(4), Validators.maxLength(50)],
-      password: [
-        '',
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(30),
-      ],
+      ]),
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Formulário válido', this.loginForm.value);
+      const { email, password } = this.loginForm.value as {
+        email: string;
+        password: string;
+      };
+
+      this.authService.login(email, password);
     } else {
-      console.log('Formulário inválido');
+      if (this.loginForm.get('email')?.errors) {
+        this.sweetAlertService.error(
+          'Erro no login',
+          'Preencha corretamente o campo de email.'
+        );
+
+        return;
+      }
+
+      if (this.loginForm.get('password')?.errors) {
+        this.sweetAlertService.error(
+          'Erro no login',
+          'Preencha corretamente o campo de senha.'
+        );
+
+        return;
+      }
     }
   }
 }

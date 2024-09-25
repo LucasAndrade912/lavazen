@@ -3,9 +3,12 @@ import {
   AbstractControl,
   AbstractControlOptions,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+
+import { SweertalertService } from '../../../shared/services/sweertalert.service';
 
 @Component({
   selector: 'app-signup-page',
@@ -15,33 +18,28 @@ import {
 export class SignupPageComponent {
   signupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private sweetAlertService: SweertalertService
+  ) {
     this.signupForm = this.formBuilder.group(
       {
-        name: [
-          '',
+        name: new FormControl('', [
           Validators.required,
           Validators.minLength(4),
           Validators.maxLength(50),
-        ],
-        password: [
-          '',
+        ]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(30),
-        ],
-        confirmPassword: [
-          '',
+        ]),
+        confirmPassword: new FormControl('', [
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(30),
-        ],
-        phone: [
-          '',
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(30),
-        ],
+        ]),
       },
       {
         validators: this.matchPasswords(),
@@ -63,7 +61,6 @@ export class SignupPageComponent {
         return;
       }
 
-      // Define um erro se as senhas não coincidirem
       if (passwordControl.value !== confirmPasswordControl.value) {
         confirmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
@@ -76,9 +73,45 @@ export class SignupPageComponent {
 
   onSubmit() {
     if (this.signupForm.valid) {
-      console.log('Formulário válido', this.signupForm.value);
+      this.sweetAlertService.sucess(
+        'Usuário cadastrado',
+        'Usuário foi cadastrado com sucesso!'
+      );
     } else {
-      console.log('Formulário inválido');
+      this.sweetAlertService.error('Erro no cadastro', 'Erro ao cadastrar novo usuário.');
+
+      if (this.signupForm.get('email')?.errors) {
+        this.sweetAlertService.error(
+          'Erro no cadastro',
+          'Preencha corretamente o campo de nome.'
+        );
+
+        return;
+      }
+
+      if (this.signupForm.get('email')?.errors) {
+        this.sweetAlertService.error(
+          'Erro no cadastro',
+          'Preencha corretamente o campo de email.'
+        );
+
+        return;
+      }
+
+      if (this.signupForm.get('password')?.errors) {
+        this.sweetAlertService.error(
+          'Erro no cadastro',
+          'Preencha corretamente o campo de senha.'
+        );
+
+        return;
+      }
+
+      if (this.signupForm.get('confirmPassword')?.errors) {
+        this.sweetAlertService.error('Erro no cadastro', 'As senhas não coincidem.');
+
+        return;
+      }
     }
   }
 }
