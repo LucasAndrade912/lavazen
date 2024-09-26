@@ -5,11 +5,29 @@
     <mat-form-field appearance="outline">
       <mat-label>Email:</mat-label>
       <input type="email" formControlName="email" matInput />
+
+      <mat-error *ngIf="submitted && email?.errors">
+        <span *ngIf="email?.errors?.['email']"> Formato de email inválido </span>
+
+        <span *ngIf="email?.errors?.['required']"> Email é obrigatório </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Senha:</mat-label>
       <input type="password" formControlName="password" matInput />
+
+      <mat-error *ngIf="submitted && password?.errors">
+        <span *ngIf="password?.errors?.['required']"> Senha é obrigatório </span>
+
+        <span *ngIf="password?.errors?.['minlength']">
+          Senha deve ter no mínimo 8 letras
+        </span>
+
+        <span *ngIf="password?.errors?.['maxlength']">
+          Senha deve ter no máximo 30 letras
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <button type="submit" mat-flat-button>Sign In</button>
