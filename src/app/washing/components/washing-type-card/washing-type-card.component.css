@@ -58,6 +58,7 @@
   align-items: center;
   font-size: 14px;
   gap: 4px;
+  width: 80px;
 }
 
 .card-description .text p {

@@ -8,6 +8,7 @@ import { ReservationFormComponent } from './components/reservation-form/reservat
 import { WashingTypeCardComponent } from './components/washing-type-card/washing-type-card.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ReservationsPageComponent } from './pages/reservations-page/reservations-page.component';
+import { TimeFomartPipe } from '../shared/pipes/time-fomart.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,13 @@ import { ReservationsPageComponent } from './pages/reservations-page/reservation
     ReservationsPageComponent,
     WashingTypeCardComponent,
   ],
-  imports: [CommonModule, FormsModule, MaterialModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    TimeFomartPipe,
+  ],
   exports: [HomePageComponent, ReservationFormComponent],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })
