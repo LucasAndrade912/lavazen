@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material/material.module';
 import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
@@ -16,7 +16,7 @@ import { ReservationsPageComponent } from './pages/reservations-page/reservation
     ReservationsPageComponent,
     WashingTypeCardComponent,
   ],
-  imports: [CommonModule, FormsModule, MaterialModule],
+  imports: [CommonModule, FormsModule, MaterialModule, ReactiveFormsModule],
   exports: [HomePageComponent, ReservationFormComponent],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })

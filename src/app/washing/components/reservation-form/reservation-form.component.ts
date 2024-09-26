@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
-import { FormData } from './form-data';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroupReservationData, ReservationData } from './interfaces';
 
 @Component({
   selector: 'app-reservation-form',
@@ -10,38 +11,66 @@ import { FormData } from './form-data';
   providers: [provideNativeDateAdapter()],
 })
 export class ReservationFormComponent {
-  formData: FormData = {
-    name: '',
-    carModel: '',
-    phone: '',
-    date: null,
-    paymentMethod: '',
-    observations: '',
-  };
-
+  submitted = false;
+  reservationForm: FormGroup;
   private readonly _currentDate = new Date();
   readonly minDate = new Date(this._currentDate);
   readonly maxDate = new Date(
     this._currentDate.setMonth(this._currentDate.getMonth() + 1)
   );
-
   paymentMethodOptions = [
     { viewValue: 'PIX', value: 'pix' },
     { viewValue: 'Cartão de crédito', value: 'credit_card' },
     { viewValue: 'Dinheiro', value: 'cash' },
   ];
 
-  @Output() createNewReservationEvent = new EventEmitter<FormData>();
+  @Output() scheduleReservation = new EventEmitter<ReservationData>();
 
-  createNewReservation() {
-    this.createNewReservationEvent.emit(this.formData);
-    this.formData = {
-      name: '',
-      carModel: '',
-      phone: '',
-      date: null,
-      paymentMethod: '',
-      observations: '',
-    };
+  constructor(private formBuilder: FormBuilder) {
+    this.reservationForm = this.formBuilder.group({
+      carPlate: new FormControl('', [Validators.required]),
+      carModel: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      startHour: new FormControl('', []),
+      paymentMethod: new FormControl('', [Validators.required]),
+      observations: new FormControl('', [Validators.maxLength(255)]),
+    });
+  }
+
+  handleScheduleReservation() {
+    this.submitted = true;
+
+    if (this.reservationForm.valid) {
+      const form = this.reservationForm.value as FormGroupReservationData;
+
+      this.scheduleReservation.emit({
+        ...form,
+        date: form.date.toLocaleDateString('pt-br'),
+      });
+    }
+  }
+
+  get carPlate() {
+    return this.reservationForm.get('carPlate');
+  }
+
+  get carModel() {
+    return this.reservationForm.get('carModel');
+  }
+
+  get date() {
+    return this.reservationForm.get('date');
+  }
+
+  get startHour() {
+    return this.reservationForm.get('startHour');
+  }
+
+  get paymentMethod() {
+    return this.reservationForm.get('paymentMethod');
+  }
+
+  get observations() {
+    return this.reservationForm.get('observations');
   }
 }

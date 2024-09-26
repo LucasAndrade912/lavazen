@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { Reservation } from '../../../shared/models/reservation';
 import { ReservationService } from '../../../shared/services/reservation.service';
 import { SweertalertService } from '../../../shared/services/sweertalert.service';
-import { FormData } from '../../components/reservation-form/form-data';
+import { ReservationData } from '../../components/reservation-form/interfaces';
+import { Reservation } from '../../../shared/models/reservation';
 
 interface WashingCard {
   id: string;
@@ -31,41 +31,40 @@ export class HomePageComponent {
       id: 'card1',
       value: '1',
       title: 'Lavagem simples',
-      price: 20,
-      duration: 20,
+      price: 50,
+      duration: 45,
     },
     {
       id: 'card2',
       value: '2',
       title: 'Lavagem completa',
-      price: 50,
-      duration: 45,
+      price: 120,
+      duration: 120,
+    },
+    {
+      id: 'card3',
+      value: '3',
+      title: 'Lavagem a seco',
+      price: 70,
+      duration: 60,
+    },
+    {
+      id: 'card4',
+      value: '4',
+      title: 'Lavagem com cera',
+      price: 150,
+      duration: 120,
     },
   ];
 
-  handleCreateNewReservation(data: FormData) {
-    if (
-      !this.washingId ||
-      !data.carModel ||
-      !data.date ||
-      !data.paymentMethod ||
-      !data.name ||
-      !data.phone
-    ) {
-      this.sweetAlertService.error(
-        'Preencha todos os campos',
-        'Preencha todos os campos para seguir com o cadastro.'
-      );
-      return;
-    }
-
+  handleScheduleReservation(data: ReservationData) {
     const reservation = new Reservation(
       '1',
       this.washingId,
       data.carModel,
       data.paymentMethod,
       data.observations,
-      data.date ?? new Date()
+      new Date(data.date)
     );
 
     this.reservationService.createReservation(reservation).subscribe({
@@ -74,7 +73,6 @@ export class HomePageComponent {
           'Cadastro realizado!',
           'Reserva de lavagem cadastrada com sucesso.'
         );
-
         this.washingId = '';
       },
     });
