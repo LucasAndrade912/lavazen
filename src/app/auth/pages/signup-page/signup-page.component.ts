@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   AbstractControlOptions,
@@ -7,7 +7,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { AuthService } from '../../../shared/services/auth.service';
 import { SweertalertService } from '../../../shared/services/sweertalert.service';
 
 @Component({
@@ -15,12 +17,15 @@ import { SweertalertService } from '../../../shared/services/sweertalert.service
   templateUrl: './signup-page.component.html',
   styleUrl: './signup-page.component.css',
 })
-export class SignupPageComponent {
+export class SignupPageComponent implements OnInit {
+  submitted = false;
   signupForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private sweetAlertService: SweertalertService
+    private authService: AuthService,
+    private sweetAlertService: SweertalertService,
+    private router: Router
   ) {
     this.signupForm = this.formBuilder.group(
       {
@@ -45,6 +50,12 @@ export class SignupPageComponent {
         validators: this.matchPasswords(),
       } as AbstractControlOptions
     );
+  }
+
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['app', 'home']);
+    }
   }
 
   matchPasswords() {
@@ -72,46 +83,29 @@ export class SignupPageComponent {
   }
 
   onSubmit() {
+    this.submitted = true;
+
     if (this.signupForm.valid) {
       this.sweetAlertService.sucess(
         'Usuário cadastrado',
         'Usuário foi cadastrado com sucesso!'
       );
-    } else {
-      this.sweetAlertService.error('Erro no cadastro', 'Erro ao cadastrar novo usuário.');
-
-      if (this.signupForm.get('email')?.errors) {
-        this.sweetAlertService.error(
-          'Erro no cadastro',
-          'Preencha corretamente o campo de nome.'
-        );
-
-        return;
-      }
-
-      if (this.signupForm.get('email')?.errors) {
-        this.sweetAlertService.error(
-          'Erro no cadastro',
-          'Preencha corretamente o campo de email.'
-        );
-
-        return;
-      }
-
-      if (this.signupForm.get('password')?.errors) {
-        this.sweetAlertService.error(
-          'Erro no cadastro',
-          'Preencha corretamente o campo de senha.'
-        );
-
-        return;
-      }
-
-      if (this.signupForm.get('confirmPassword')?.errors) {
-        this.sweetAlertService.error('Erro no cadastro', 'As senhas não coincidem.');
-
-        return;
-      }
     }
+  }
+
+  get name() {
+    return this.signupForm.get('name');
+  }
+
+  get email() {
+    return this.signupForm.get('email');
+  }
+
+  get password() {
+    return this.signupForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.signupForm.get('confirmPassword');
   }
 }
