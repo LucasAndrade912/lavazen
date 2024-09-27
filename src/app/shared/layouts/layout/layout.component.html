@@ -12,9 +12,29 @@
       </li>
     </ul>
   
-    <div id="avatar">
+    <button id="avatar" [matMenuTriggerFor]="menu">
       <img src="/avatar-angular.png" alt="Foto de perfil" />
-    </div>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+
+        <span>Meu perfil</span>
+      </button>
+      
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+
+        <span>Configurações</span>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+
+        <span>Sair</span>
+      </button>
+    </mat-menu>
   </header>
   
   <main>

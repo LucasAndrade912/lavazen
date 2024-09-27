@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
+import { MaterialModule } from '../../material/material.module';
 
 @NgModule({
   declarations: [LayoutComponent],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MaterialModule],
   exports: [LayoutComponent],
 })
 export class LayoutsModule {}
