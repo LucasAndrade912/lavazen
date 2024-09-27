@@ -1,6 +1,11 @@
+#container {
+  width: 100%;
+  max-width: 1132px;
+  margin: auto;
+}
+
 header {
-  margin-top: 40px;
-  padding: 0 80px;
+  padding-top: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,6 +47,6 @@ header #avatar img {
 }
 
 main {
-  padding: 0 80px 80px;
+  width: 100%;
   margin-top: 56px;
 }
