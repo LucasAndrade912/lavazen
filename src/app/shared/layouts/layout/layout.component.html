@@ -6,23 +6,23 @@
           <h1>LavaZen</h1>
         </a>
       </li>
-  
+
       <li>
         <a [routerLink]="['reservations']">Agendamentos</a>
       </li>
     </ul>
-  
-    <button id="avatar" [matMenuTriggerFor]="menu">
+
+    <button class="avatar" [matMenuTriggerFor]="menu">
       <img src="/avatar-angular.png" alt="Foto de perfil" />
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="['profile']">
         <mat-icon>person</mat-icon>
 
         <span>Meu perfil</span>
       </button>
-      
+
       <button mat-menu-item>
         <mat-icon>settings</mat-icon>
 
@@ -36,8 +36,8 @@
       </button>
     </mat-menu>
   </header>
-  
+
   <main>
     <router-outlet />
-  </main>  
+  </main>
 </div>

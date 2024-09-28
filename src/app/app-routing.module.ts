@@ -7,6 +7,7 @@ import { SignupPageComponent } from './auth/pages/signup-page/signup-page.compon
 import { LayoutComponent } from './shared/layouts/layout/layout.component';
 import { HomePageComponent } from './washing/pages/home-page/home-page.component';
 import { ReservationsPageComponent } from './washing/pages/reservations-page/reservations-page.component';
+import { ProfileComponent } from './user/pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomePageComponent },
       { path: 'reservations', component: ReservationsPageComponent },
+      { path: 'profile', component: ProfileComponent },
     ],
   },
   { path: 'signup', component: SignupPageComponent },
