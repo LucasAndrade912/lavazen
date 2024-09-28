@@ -7,15 +7,20 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 
+import { User } from '../../../shared/models/user';
 import { AuthService } from '../../../shared/services/auth.service';
 import { SweertalertService } from '../../../shared/services/sweertalert.service';
+import { UserService } from '../../../shared/services/user.service';
+import { SignUpFormData } from './interfaces';
 
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
   styleUrl: './signup-page.component.css',
+  providers: [provideNativeDateAdapter()],
 })
 export class SignupPageComponent implements OnInit {
   submitted = false;
@@ -25,6 +30,7 @@ export class SignupPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private sweetAlertService: SweertalertService,
+    private userService: UserService,
     private router: Router
   ) {
     this.signupForm = this.formBuilder.group(
@@ -35,6 +41,7 @@ export class SignupPageComponent implements OnInit {
           Validators.maxLength(50),
         ]),
         email: new FormControl('', [Validators.required, Validators.email]),
+        birthDay: new FormControl('', [Validators.required]),
         password: new FormControl('', [
           Validators.required,
           Validators.minLength(8),
@@ -86,10 +93,23 @@ export class SignupPageComponent implements OnInit {
     this.submitted = true;
 
     if (this.signupForm.valid) {
-      this.sweetAlertService.sucess(
-        'Usuário cadastrado',
-        'Usuário foi cadastrado com sucesso!'
-      );
+      const data = this.signupForm.value as SignUpFormData;
+
+      const user = new User({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        birthDay: data.birthDay.toLocaleDateString(),
+      });
+
+      this.userService.createUser(user).subscribe({
+        next: () => {
+          this.sweetAlertService.sucess(
+            'Usuário cadastrado',
+            'Usuário foi cadastrado com sucesso!'
+          );
+        },
+      });
     }
   }
 
@@ -99,6 +119,10 @@ export class SignupPageComponent implements OnInit {
 
   get email() {
     return this.signupForm.get('email');
+  }
+
+  get birthDay() {
+    return this.signupForm.get('birthDay');
   }
 
   get password() {

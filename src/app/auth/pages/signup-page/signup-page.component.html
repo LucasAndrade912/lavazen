@@ -1,9 +1,9 @@
-<div>
+<div class="container">
   <h1>LavaZen</h1>
 
   <form class="container" [formGroup]="signupForm" (submit)="onSubmit()">
     <mat-form-field appearance="outline">
-      <mat-label>Nome:</mat-label>
+      <mat-label>Nome completo:</mat-label>
       <input type="text" formControlName="name" matInput />
 
       <mat-error *ngIf="submitted && name?.errors">
@@ -19,56 +19,73 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Email:</mat-label>
-      <input type="email" formControlName="email" matInput />
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Email:</mat-label>
+        <input type="email" formControlName="email" matInput />
 
-      <mat-error *ngIf="submitted && email?.errors">
-        <span *ngIf="email?.errors?.['email']"> Formato de email inválido </span>
+        <mat-error *ngIf="submitted && email?.errors">
+          <span *ngIf="email?.errors?.['email']"> Formato de email inválido </span>
 
-        <span *ngIf="email?.errors?.['required']"> Email é obrigatório </span>
-      </mat-error>
-    </mat-form-field>
+          <span *ngIf="email?.errors?.['required']"> Email é obrigatório </span>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Senha:</mat-label>
-      <input type="password" formControlName="password" matInput />
+      <mat-form-field appearance="outline">
+        <mat-label>Data de nascimento:</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDay" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
 
-      <mat-error *ngIf="submitted && password?.errors">
-        <span *ngIf="password?.errors?.['required']"> Senha é obrigatório </span>
+        <mat-error *ngIf="submitted && birthDay?.errors" class="invalid-feedback">
+          <span *ngIf="birthDay?.errors?.['required']"
+            >Data de nascimento é obrigatório</span
+          >
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-        <span *ngIf="password?.errors?.['minlength']">
-          Senha deve ter no mínimo 8 letras
-        </span>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Senha:</mat-label>
+        <input type="password" formControlName="password" matInput />
 
-        <span *ngIf="password?.errors?.['maxlength']">
-          Senha deve ter no máximo 30 letras
-        </span>
-      </mat-error>
-    </mat-form-field>
+        <mat-error *ngIf="submitted && password?.errors">
+          <span *ngIf="password?.errors?.['required']"> Senha é obrigatório </span>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Confirmar senha:</mat-label>
-      <input type="password" formControlName="confirmPassword" matInput />
+          <span *ngIf="password?.errors?.['minlength']">
+            Senha deve ter no mínimo 8 letras
+          </span>
 
-      <mat-error *ngIf="submitted && confirmPassword?.errors">
-        <span *ngIf="confirmPassword?.errors?.['required']">
-          Confirmar senha é obrigatório
-        </span>
+          <span *ngIf="password?.errors?.['maxlength']">
+            Senha deve ter no máximo 30 letras
+          </span>
+        </mat-error>
+      </mat-form-field>
 
-        <span *ngIf="confirmPassword?.errors?.['minlength']">
-          Deve ter no mínimo 8 letras
-        </span>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar senha:</mat-label>
+        <input type="password" formControlName="confirmPassword" matInput />
 
-        <span *ngIf="confirmPassword?.errors?.['maxlength']">
-          Deve ter no máximo 30 letras
-        </span>
+        <mat-error *ngIf="submitted && confirmPassword?.errors">
+          <span *ngIf="confirmPassword?.errors?.['required']">
+            Confirmar senha é obrigatório
+          </span>
 
-        <span *ngIf="confirmPassword?.errors?.['passwordMismatch']">
-          As senhas não coincidem
-        </span>
-      </mat-error>
-    </mat-form-field>
+          <span *ngIf="confirmPassword?.errors?.['minlength']">
+            Deve ter no mínimo 8 letras
+          </span>
+
+          <span *ngIf="confirmPassword?.errors?.['maxlength']">
+            Deve ter no máximo 30 letras
+          </span>
+
+          <span *ngIf="confirmPassword?.errors?.['passwordMismatch']">
+            As senhas não coincidem
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </div>
 
     <button type="submit" mat-flat-button>Sign Up</button>
 
