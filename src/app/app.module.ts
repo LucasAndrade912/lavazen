@@ -6,8 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { LayoutsModule } from './shared/layouts/layouts.module';
-import { WashingModule } from './washing/washing.module';
 import { UserModule } from './user/user.module';
+import { WashingModule } from './washing/washing.module';
+import { FirebaseModule } from './firebase/firebase.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
     WashingModule,
     AuthModule,
     UserModule,
+    FirebaseModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
