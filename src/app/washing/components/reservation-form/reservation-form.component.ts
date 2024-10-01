@@ -14,7 +14,7 @@ export class ReservationFormComponent {
   submitted = false;
   reservationForm: FormGroup;
   private readonly _currentDate = new Date();
-  readonly minDate = new Date(this._currentDate);
+  readonly minDate = new Date(this._currentDate.setDate(this._currentDate.getDate() + 1));
   readonly maxDate = new Date(
     this._currentDate.setMonth(this._currentDate.getMonth() + 1)
   );
