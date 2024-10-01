@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Reservation } from '../../../shared/models/reservation';
-import { ReservationService } from '../../../shared/services/reservation.service';
+import { Booking } from '../../../shared/models/booking';
 import { SweertalertService } from '../../../shared/services/sweertalert.service';
 import { WashingService } from '../../../shared/services/washing.service';
 import { ReservationData } from '../../components/reservation-form/interfaces';
@@ -23,7 +22,6 @@ interface WashingCard {
 export class HomePageComponent implements OnInit {
   constructor(
     private bookingService: BookingService,
-    private reservationService: ReservationService,
     private sweetAlertService: SweertalertService,
     private washingService: WashingService
   ) {}
@@ -79,16 +77,17 @@ export class HomePageComponent implements OnInit {
   }
 
   handleScheduleReservation(data: ReservationData) {
-    const reservation = new Reservation(
-      '1',
+    const booking = new Booking(
       this.washingId,
       data.carModel,
+      data.carPlate,
+      data.startHour,
       data.paymentMethod,
-      data.observations,
-      new Date(data.date)
+      data.date,
+      data.observations
     );
 
-    this.reservationService.createReservation(reservation).subscribe({
+    this.bookingService.create(booking).subscribe({
       next: () => {
         this.sweetAlertService.sucess(
           'Cadastro realizado!',

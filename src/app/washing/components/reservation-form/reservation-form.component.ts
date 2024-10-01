@@ -19,9 +19,9 @@ export class ReservationFormComponent {
     this._currentDate.setMonth(this._currentDate.getMonth() + 1)
   );
   paymentMethodOptions = [
-    { viewValue: 'PIX', value: 'pix' },
-    { viewValue: 'Cartão de crédito', value: 'credit_card' },
-    { viewValue: 'Dinheiro', value: 'cash' },
+    { viewValue: 'PIX', value: 'PIX' },
+    { viewValue: 'Cartão de crédito', value: 'CREDIT_CARD' },
+    { viewValue: 'Dinheiro', value: 'CASH' },
   ];
 
   @Input() washingDuration = 0;
@@ -50,6 +50,8 @@ export class ReservationFormComponent {
         ...form,
         date: form.date.toLocaleDateString('pt-br'),
       });
+
+      this.reservationForm.reset();
     }
   }
 

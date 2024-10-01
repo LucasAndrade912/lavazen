@@ -1,20 +1,13 @@
-export class Reservation {
+export class Booking {
   constructor(
-    private _userId: string,
     private _washingId: string,
     private _carModel: string,
+    private _carPlate: string,
+    private _startHour: string,
     private _paymentMethod: string,
-    private _observations: string,
-    private _date: Date = new Date()
+    private _date: string,
+    private _observations?: string | null
   ) {}
-
-  public get userId(): string {
-    return this._userId;
-  }
-
-  public set userId(value: string) {
-    this._userId = value;
-  }
 
   public get washingId(): string {
     return this._washingId;
@@ -24,11 +17,11 @@ export class Reservation {
     this._washingId = value;
   }
 
-  public get date(): Date {
+  public get date() {
     return this._date;
   }
 
-  public set date(value: Date) {
+  public set date(value: string) {
     this._date = value;
   }
 
@@ -40,6 +33,22 @@ export class Reservation {
     this._carModel = value;
   }
 
+  public get carPlate(): string {
+    return this._carPlate;
+  }
+
+  public set carPlate(value: string) {
+    this._carPlate = value;
+  }
+
+  public get startHour(): string {
+    return this._startHour;
+  }
+
+  public set startHour(value: string) {
+    this._startHour = value;
+  }
+
   public get paymentMethod(): string {
     return this._paymentMethod;
   }
@@ -48,7 +57,7 @@ export class Reservation {
     this._paymentMethod = value;
   }
 
-  public get observations(): string {
+  public get observations(): string | undefined | null {
     return this._observations;
   }
 
