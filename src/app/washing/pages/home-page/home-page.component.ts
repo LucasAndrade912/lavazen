@@ -88,12 +88,16 @@ export class HomePageComponent implements OnInit {
     );
 
     this.bookingService.create(booking).subscribe({
-      next: () => {
-        this.sweetAlertService.sucess(
-          'Cadastro realizado!',
-          'Reserva de lavagem cadastrada com sucesso.'
-        );
-        this.washingId = '';
+      next: (data) => {
+        this.bookingService.saveInFirestore(data).subscribe({
+          next: () => {
+            this.sweetAlertService.sucess(
+              'Cadastro realizado!',
+              'Reserva de lavagem cadastrada com sucesso.'
+            );
+            this.washingId = '';
+          },
+        });
       },
     });
   }
