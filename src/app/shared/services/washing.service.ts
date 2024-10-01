@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { AuthService } from './auth.service';
-
 interface WashingResponse {
   id: number;
   name: string;
@@ -17,10 +15,7 @@ interface WashingResponse {
 export class WashingService {
   private baseUrl = 'http://localhost:8080';
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   list() {
     return this.http.get<WashingResponse[]>(`${this.baseUrl}/washings`);

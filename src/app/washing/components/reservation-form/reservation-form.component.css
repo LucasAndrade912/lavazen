@@ -10,7 +10,8 @@ section form {
 
 section form .row {
   display: flex;
-  gap: 32px;
+  width: 100%;
+  gap: 14px;
 }
 
 section form mat-form-field {

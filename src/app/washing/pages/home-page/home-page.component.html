@@ -4,10 +4,17 @@
 
     <div class="cards">
       @for (card of washingTypesCards; track card.id) {
-        <app-washing-type-card [props]="card" [(washingId)]="washingId" />
+        <app-washing-type-card
+          [props]="card"
+          [washingId]="washingId"
+          (washingIdChange)="handleWashingIdChange($event)" />
       }
     </div>
   </section>
 
-  <app-reservation-form (scheduleReservation)="handleScheduleReservation($event)" />
+  <app-reservation-form
+    [washingDuration]="washingDuration"
+    [availableTimes]="availableTimes"
+    (scheduleReservation)="handleScheduleReservation($event)"
+    (dateSelection)="handleDateSelection($event)" />
 </div>

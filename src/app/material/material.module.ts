@@ -22,7 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDatepickerModule,
     MatCardModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   exports: [
     MatIconModule,
@@ -33,7 +33,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDatepickerModule,
     MatCardModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
   ],
 })
 export class MaterialModule {}

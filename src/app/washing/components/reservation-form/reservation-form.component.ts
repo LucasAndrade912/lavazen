@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +24,10 @@ export class ReservationFormComponent {
     { viewValue: 'Dinheiro', value: 'cash' },
   ];
 
+  @Input() washingDuration = 0;
+  @Input() availableTimes: string[] = [];
   @Output() scheduleReservation = new EventEmitter<ReservationData>();
+  @Output() dateSelection = new EventEmitter<string>();
 
   constructor(private formBuilder: FormBuilder) {
     this.reservationForm = this.formBuilder.group({
@@ -48,6 +51,11 @@ export class ReservationFormComponent {
         date: form.date.toLocaleDateString('pt-br'),
       });
     }
+  }
+
+  handleDateSelect() {
+    const formattedDate = (this.date?.value as Date).toLocaleDateString('pt-br');
+    this.dateSelection.emit(formattedDate);
   }
 
   get carPlate() {

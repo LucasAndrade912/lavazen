@@ -1,56 +1,72 @@
 <section id="reservation-form">
   <h2>Dados para agendamento</h2>
-
   <form [formGroup]="reservationForm" (submit)="handleScheduleReservation()">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Placa do carro:</mat-label>
+        <input matInput formControlName="carPlate" />
+
+        <mat-error *ngIf="submitted && carPlate?.errors" class="invalid-feedback">
+          <span *ngIf="carPlate?.errors?.['required']">Placa do carro é obrigatório</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Modelo do carro:</mat-label>
+        <input matInput placeholder="Ex: HB20, Corsa" formControlName="carModel" />
+
+        <mat-error *ngIf="submitted && carModel?.errors" class="invalid-feedback">
+          <span *ngIf="carModel?.errors?.['required']"
+            >Modelo do carro é obrigatório</span
+          >
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Data da lavagem</mat-label>
+        <input
+          matInput
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="picker"
+          (dateChange)="handleDateSelect()"
+          formControlName="date" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error *ngIf="submitted && date?.errors" class="invalid-feedback">
+          <span *ngIf="date?.errors?.['required']">Data de lavagem é obrigatório</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Método de pagamento</mat-label>
+        <mat-select formControlName="paymentMethod">
+          @for (method of paymentMethodOptions; track method) {
+            <mat-option [value]="method.value">{{ method.viewValue }}</mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="submitted && paymentMethod?.errors" class="invalid-feedback">
+          <span *ngIf="paymentMethod?.errors?.['required']">
+            Método de pagamento é obrigatório
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
     <mat-form-field appearance="outline">
-      <mat-label>Placa do carro:</mat-label>
-      <input matInput formControlName="carPlate" />
-
-      <mat-error *ngIf="submitted && carPlate?.errors" class="invalid-feedback">
-        <span *ngIf="carPlate?.errors?.['required']">Placa do carro é obrigatório</span>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Modelo do carro:</mat-label>
-      <input matInput placeholder="Ex: HB20, Corsa" formControlName="carModel" />
-
-      <mat-error *ngIf="submitted && carModel?.errors" class="invalid-feedback">
-        <span *ngIf="carModel?.errors?.['required']">Modelo do carro é obrigatório</span>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Data da lavagem</mat-label>
-      <input
-        matInput
-        [min]="minDate"
-        [max]="maxDate"
-        [matDatepicker]="picker"
-        formControlName="date" />
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-
-      <mat-error *ngIf="submitted && date?.errors" class="invalid-feedback">
-        <span *ngIf="date?.errors?.['required']">Data de lavagem é obrigatório</span>
-      </mat-error>
-    </mat-form-field>
-
-    <!-- TO DO: Exibir horas disponíveis para lavagem -->
-
-    <mat-form-field appearance="outline">
-      <mat-label>Método de pagamento</mat-label>
-      <mat-select formControlName="paymentMethod">
-        @for (method of paymentMethodOptions; track method) {
-          <mat-option [value]="method.value">{{ method.viewValue }}</mat-option>
+      <mat-label>Selecione o horário</mat-label>
+      <mat-select formControlName="startHour">
+        <mat-option>--</mat-option>
+        @for (time of availableTimes; track time) {
+          <mat-option [value]="time">{{
+            time | hourRangeFormat: this.washingDuration
+          }}</mat-option>
         }
       </mat-select>
-
-      <mat-error *ngIf="submitted && paymentMethod?.errors" class="invalid-feedback">
-        <span *ngIf="paymentMethod?.errors?.['required']">
-          Método de pagamento é obrigatório
-        </span>
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

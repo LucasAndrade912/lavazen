@@ -5,6 +5,7 @@ import { ReservationService } from '../../../shared/services/reservation.service
 import { SweertalertService } from '../../../shared/services/sweertalert.service';
 import { WashingService } from '../../../shared/services/washing.service';
 import { ReservationData } from '../../components/reservation-form/interfaces';
+import { BookingService } from '../../../shared/services/booking.service';
 
 interface WashingCard {
   id: string;
@@ -21,6 +22,7 @@ interface WashingCard {
 })
 export class HomePageComponent implements OnInit {
   constructor(
+    private bookingService: BookingService,
     private reservationService: ReservationService,
     private sweetAlertService: SweertalertService,
     private washingService: WashingService
@@ -40,8 +42,41 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  selectedDate = '';
   washingId = '';
   washingTypesCards: WashingCard[] = [];
+  washingDuration = 0;
+  availableTimes: string[] = [];
+
+  handleDateSelection(date: string) {
+    this.selectedDate = date;
+
+    if (this.washingId && this.selectedDate) {
+      this.bookingService
+        .listAvailableTimes(Number(this.washingId), this.selectedDate)
+        .subscribe({
+          next: (times) => {
+            this.availableTimes = times;
+          },
+        });
+    }
+  }
+
+  handleWashingIdChange(id: string) {
+    this.washingId = id;
+
+    this.washingDuration = this.washingTypesCards[Number(id) - 1].duration;
+
+    if (this.washingId && this.selectedDate) {
+      this.bookingService
+        .listAvailableTimes(Number(this.washingId), this.selectedDate)
+        .subscribe({
+          next: (times) => {
+            this.availableTimes = times;
+          },
+        });
+    }
+  }
 
   handleScheduleReservation(data: ReservationData) {
     const reservation = new Reservation(
