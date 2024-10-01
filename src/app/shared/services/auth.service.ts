@@ -76,6 +76,10 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  getAccessToken() {
+    return this.accessToken;
+  }
+
   isLoggedIn() {
     return this.accessToken != '';
   }

@@ -5,10 +5,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { FirebaseModule } from './firebase/firebase.module';
 import { LayoutsModule } from './shared/layouts/layouts.module';
 import { UserModule } from './user/user.module';
 import { WashingModule } from './washing/washing.module';
-import { FirebaseModule } from './firebase/firebase.module';
 
 @NgModule({
   declarations: [AppComponent],

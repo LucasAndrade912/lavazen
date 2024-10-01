@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { Reservation } from '../../../shared/models/reservation';
 import { ReservationService } from '../../../shared/services/reservation.service';
 import { SweertalertService } from '../../../shared/services/sweertalert.service';
+import { WashingService } from '../../../shared/services/washing.service';
 import { ReservationData } from '../../components/reservation-form/interfaces';
-import { Reservation } from '../../../shared/models/reservation';
 
 interface WashingCard {
   id: string;
@@ -18,44 +19,29 @@ interface WashingCard {
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   constructor(
     private reservationService: ReservationService,
-    private sweetAlertService: SweertalertService
+    private sweetAlertService: SweertalertService,
+    private washingService: WashingService
   ) {}
 
-  washingId = '';
+  ngOnInit() {
+    this.washingService.list().subscribe({
+      next: (washings) => {
+        this.washingTypesCards = washings.map((washing) => ({
+          id: `card${washing.id}`,
+          value: `${washing.id}`,
+          title: washing.name,
+          price: washing.price,
+          duration: washing.duration,
+        }));
+      },
+    });
+  }
 
-  washingTypesCards: WashingCard[] = [
-    {
-      id: 'card1',
-      value: '1',
-      title: 'Lavagem simples',
-      price: 50,
-      duration: 45,
-    },
-    {
-      id: 'card2',
-      value: '2',
-      title: 'Lavagem completa',
-      price: 120,
-      duration: 120,
-    },
-    {
-      id: 'card3',
-      value: '3',
-      title: 'Lavagem a seco',
-      price: 70,
-      duration: 60,
-    },
-    {
-      id: 'card4',
-      value: '4',
-      title: 'Lavagem com cera',
-      price: 150,
-      duration: 120,
-    },
-  ];
+  washingId = '';
+  washingTypesCards: WashingCard[] = [];
 
   handleScheduleReservation(data: ReservationData) {
     const reservation = new Reservation(
