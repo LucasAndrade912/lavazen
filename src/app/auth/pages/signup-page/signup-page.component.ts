@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 import { User } from '../../../shared/models/user';
 import { AuthService } from '../../../shared/services/auth.service';
 import { SweertalertService } from '../../../shared/services/sweertalert.service';
-import { UserService } from '../../../shared/services/user.service';
 import { SignUpFormData } from './interfaces';
 
 @Component({
@@ -30,7 +29,6 @@ export class SignupPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private sweetAlertService: SweertalertService,
-    private userService: UserService,
     private router: Router
   ) {
     this.signupForm = this.formBuilder.group(
@@ -102,13 +100,20 @@ export class SignupPageComponent implements OnInit {
         birthDay: data.birthDay.toLocaleDateString(),
       });
 
-      this.userService.createUser(user).subscribe({
+      this.authService.register(user).subscribe({
         next: () => {
           this.sweetAlertService.sucess(
             'Usuário cadastrado',
-            'Usuário foi cadastrado com sucesso!'
+            'Usuário cadastrado no sistema com'
           );
+
+          this.router.navigate(['app', 'home']);
         },
+        error: () =>
+          this.sweetAlertService.error(
+            'Erro no cadastro',
+            'Ocorreu um erro ao tentar cadastrar usuário.'
+          ),
       });
     }
   }

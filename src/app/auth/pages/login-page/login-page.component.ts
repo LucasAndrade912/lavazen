@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../shared/services/auth.service';
+import { SweertalertService } from '../../../shared/services/sweertalert.service';
 
 @Component({
   selector: 'app-login-page',
@@ -16,6 +17,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private sweetAlertService: SweertalertService,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -43,7 +45,21 @@ export class LoginPageComponent implements OnInit {
         password: string;
       };
 
-      this.authService.login(email, password);
+      this.authService.login(email, password).subscribe({
+        next: () => {
+          this.sweetAlertService.sucess(
+            'Login bem sucedido',
+            'Usuário logado no sistema com sucesso!'
+          );
+
+          this.router.navigate(['app', 'home']);
+        },
+        error: () =>
+          this.sweetAlertService.error(
+            'Erro no login',
+            'Usuário inexistente ou senha inválida.'
+          ),
+      });
     }
   }
 
