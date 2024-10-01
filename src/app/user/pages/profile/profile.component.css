@@ -1,4 +1,19 @@
-.avatar {
-  width: 148px;
-  height: 148px;
+form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+}
+
+.row button {
+  width: 100%;
+}
+
+button.delete {
+  background-color: #de002d;
 }

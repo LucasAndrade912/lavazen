@@ -1,9 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { tap } from 'rxjs';
+
 import { User } from '../models/user';
+
+interface ProfileResponse {
+  id: number;
+  name: string;
+  phone: string;
+  birthDay: string;
+  address: string;
+}
 
 interface LoginResponse {
   token: string;
@@ -74,6 +83,23 @@ export class AuthService {
     this.accessToken = '';
     localStorage.removeItem('lavazen.access_token');
     this.router.navigate(['/login']);
+  }
+
+  profile() {
+    return this.http.get<ProfileResponse>(`${this.baseUrl}/profile`);
+  }
+
+  updateProfile(name: string, phone: string, birthDay: string, address: string) {
+    return this.http.patch<ProfileResponse>(`${this.baseUrl}/profile`, {
+      name,
+      phone,
+      birthDay,
+      address,
+    });
+  }
+
+  deleteProfile() {
+    return this.http.delete(`${this.baseUrl}/profile`);
   }
 
   getAccessToken() {

@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { Booking } from '../models/booking';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { from } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+
+import { Booking } from '../models/booking';
+import { AuthService } from './auth.service';
 
 interface ResponseCreateBooking {
   id: number;
@@ -25,7 +27,8 @@ export class BookingService {
 
   constructor(
     private http: HttpClient,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private authService: AuthService
   ) {}
 
   listAvailableTimes(washingId: number, date: string) {
@@ -50,6 +53,13 @@ export class BookingService {
   }
 
   listAll() {
-    return this.firestore.collection<Booking>(this.collectionName).valueChanges();
+    const accessToken = this.authService.getAccessToken();
+    const sub = jwtDecode(accessToken).sub;
+
+    return this.firestore
+      .collection<Booking>(this.collectionName, (ref) =>
+        ref.where('userEmail', '==', sub)
+      )
+      .valueChanges();
   }
 }
