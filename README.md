@@ -13,6 +13,10 @@
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
 </div>
 
+## Layout
+
+<img src="https://github.com/LucasAndrade912/lavazen/blob/main/preview/layout.png" />
+
 ## 🖥️ Frontend
 
 O frontend do projeto foi construído utilizando o framework Angular para a criação da interface gráfica. Utilizando a linguagem Typescript foi possível manter o projeto estruturado e bem organizado, separando cada parte do sistema em diferentes módulo.
